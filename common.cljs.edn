@@ -1,0 +1,69 @@
+;; Figwheel annotations
+^{:watch-dirs ["src/hello_world"]
+  :css-dirs ["resources/public/css"]}
+
+;; Standard ClojureScript compiler options
+{:main         tech.matterindustries.titan.ui.core
+ :output-to    "resources/public/js/titan-ui.js"
+ :output-dir   "resources/public/js"
+ :asset-path   "/js"
+ :language-out :ecmascript5 ;; see https://dev.clojure.org/jira/browse/CLJS-2376
+
+ :infer-externs  true
+ :output-wrapper true
+ :npm-deps       false
+
+ :closure-defines  {goog.DEBUG                                                    true
+                    tech.matterindustries.titan.ui.config/OAUTH_DOMAIN            "titan-ui-dev.auth.us-east-2.amazoncognito.com"
+                    tech.matterindustries.titan.ui.config/OAUTH_REDIRECT_SIGN_IN  "http://localhost:9010"
+                    tech.matterindustries.titan.ui.config/OAUTH_REDIRECT_SIGN_OUT "http://localhost:9010"}
+
+ ;; https://clojurescript.org/guides/webpack
+ ;; https://figwheel.org/docs/npm.html also, but we don't use the :npm
+ ;; figwheel option. I always want to be able to use just the cljs.main
+ ;; compiler to compile. So I'm happy to manually map this - Danie.
+
+ ;; This ties together the work in `npm-libs`
+ :foreign-libs [{:file           "npm-libs/dist/npm-libs-bundle.js"
+                 :file-min       "npm-libs/dist/npm-libs-bundle-min.js"
+
+                 ;; npm-libs/npm-to-cljs-library.js is the entry point for these provides:
+                 ;; The `provides` is the name that will be `require`-able
+                 :provides       ["AWSIoTProvider"
+                                  "Amplify"
+                                  "Auth"
+                                  "DatePicker"
+                                  "Foundation"
+                                  "GeoJSON"
+                                  "Hub"
+                                  "LeafletMap"
+                                  "PubSub"
+                                  "ReactDOM"
+                                  "TileLayer"
+                                  "animated"
+                                  "react"
+                                  "useSpring"
+                                  "vega"
+                                  "vegaEmbed"
+                                  "withOAuth"]
+
+                 ;; This maps the provider names, to ClojureScript names for a (:require)
+                 ;; window.<object> -> (:require [my-object])
+                 ;; object my-object
+                 :global-exports {AWSIoTProvider AWSIoTProvider
+                                  Amplify Amplify
+                                  Auth Auth
+                                  DatePicker DatePicker
+                                  Foundation Foundation
+                                  GeoJSON GeoJSON
+                                  Hub Hub
+                                  LeafletMap LeafletMap
+                                  PubSub PubSub
+                                  ReactDOM ReactDOM
+                                  TileLayer TileLayer
+                                  animated animated
+                                  react React
+                                  useSpring useSpring
+                                  vega vega
+                                  vegaEmbed vegaEmbed
+                                  withOAuth withOAuth}}]}
