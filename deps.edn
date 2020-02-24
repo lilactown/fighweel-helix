@@ -2,6 +2,7 @@
         org.clojure/clojurescript {:mvn/version "1.10.339"}
         com.bhauman/figwheel-main {:mvn/version "0.2.3"}
         com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
-        lilactown/helix {:mvn/version "0.0.6"}}
+        lilactown/helix {:git/url "https://github.com/Lokeh/helix.git"
+                         :sha "eb8ccd586306f53dae4ec3289f3926c1dcc77403"}}
  :aliases {:fig {:main-opts ["-m" "figwheel.main"]}}
  :paths ["src" "resources" "target"]}
