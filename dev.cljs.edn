@@ -1,13 +1,7 @@
-{:main hello-world.core}
-
-^{:watch-dirs ["src/hello_world"]
-  :css-dirs ["resources/public/css"]}
+^{:watch-dirs ["src"]}
 
 ;; Standard ClojureScript compiler options
 {:main         hello-world.core
- :output-to    "resources/public/js/titan-ui.js"
- :output-dir   "resources/public/js"
- :asset-path   "/js"
  :language-out :ecmascript5 ;; see https://dev.clojure.org/jira/browse/CLJS-2376
 
  :infer-externs  true
@@ -19,12 +13,12 @@
 
                  ;; npm-libs/npm-to-cljs-library.js is the entry point for these provides:
                  ;; The `provides` is the name that will be `require`-able
-                 :provides       ["ReactDOM"
-                                  "react"]
+                 :provides       ["react"
+                                  "react-dom"]
 
                  ;; This maps the provider names, to ClojureScript names for a (:require)
                  ;; window.<object> -> (:require [my-object])
                  ;; object my-object
-                 :global-exports {ReactDOM ReactDOM
-                                  react React}}]}
+                 :global-exports {react React
+                                  react-dom ReactDOM}}]}
 
