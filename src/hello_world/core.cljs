@@ -1,4 +1,9 @@
 (ns hello-world.core
-  (:require [helix.core :refer [defnc]]))
+  (:require [helix.core :refer [defnc $]]
+            [react-dom :as rdom]))
 
-(js/console.log "Hello there world!")
+(defnc greeting [{:keys [name]}]
+  (str "hi, " name))
+
+(rdom/render ($ greeting {:name "rodney"})
+             (js/document.getElementById "app"))
